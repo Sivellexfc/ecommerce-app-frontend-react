@@ -16,7 +16,7 @@ const Header = () => {
         className="cursor-pointer flex relative"
       >
         <BsBag className="text-2xl"></BsBag>
-        <div className="bg-red-500 absolute -right-2 -bottom-2" >item amount</div>
+        <div className="bg-red-500 absolute -right-2 -bottom-2 " >item amount</div>
       </div>
     </header>
   );
