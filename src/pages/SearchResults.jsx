@@ -1,14 +1,15 @@
 import React, { useContext } from "react";
 import { ProductContext } from "../context/ProductContext";
 import Product from "../components/Product";
-import Hero from "../components/Hero";
+import { useParams } from "react-router-dom";
 
-const Home = () => {
+const SearchResults = () => {
+  const { id } = useParams();
   const { products } = useContext(ProductContext);
   console.log(products);
+
   return (
     <div>
-      <Hero></Hero>
       <section className="py-16">
         <div className="container mx-auto">
           <div
@@ -17,10 +18,7 @@ const Home = () => {
           >
             {products.map((product) => {
               return (
-                <Product
-                  key={product.id}
-                  product={product}
-                >
+                <Product key={product.id} product={product}>
                   {product.title}
                 </Product>
               );
@@ -32,4 +30,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default SearchResults;
