@@ -10,7 +10,6 @@ const Home = () => {
     fetchAllProducts(); // Herhangi bir parametre gerekmeden tüm ürünleri çek
   }, []);
 
- 
   return (
     <div>
       <Hero></Hero>

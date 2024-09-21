@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Cookies from "js-cookie";
 
-
 import AuthServices from "../services/AuthServices";
 import { Link } from "react-router-dom";
 
@@ -21,8 +20,7 @@ const LoginSeller = () => {
       const token = await AuthServices.loginSeller({ username, password });
       if (token) {
         const isValid = await AuthServices.validateToken(token);
-        if (isValid.status === 200) { // Assume token is stored in cookies
-          
+        if (isValid.status === 200) {
           window.location.href = "/";
           console.log("Giriş başarılı, token:", token);
         }

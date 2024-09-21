@@ -30,7 +30,9 @@ const Header = ({ userRole }) => {
   });
 
   const handleLogout = () => {
-    Cookies.remove("authToken"); // Çıkış yapınca token'ı sileriz
+    Cookies.remove("authToken");
+    Cookies.remove("storeId");
+    localStorage.clear(); // Çıkış yapınca token'ı sileriz
     setIsUserLoggedIn(false);
     window.location.href = "/"; // Anasayfaya yönlendir
   };

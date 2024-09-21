@@ -49,6 +49,8 @@ const ProductForm = () => {
     } catch (error) {
       console.error("Bir hata oluştu:", error);
     }
+    window.location.href = "/seller-dashboard";
+    
   };
 
   return (

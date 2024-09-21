@@ -19,18 +19,42 @@ class AuthServices {
         const token = response.data;
         const decodedToken = jwtDecode(token);
         const userRole = decodedToken.roles;
-        
+
         localStorage.setItem("userRole", userRole);
         Cookies.set("authToken", token, {
           expires: 1,
           secure: true,
           sameSite: "Strict",
         });
+        this.getStoreId(decodedToken.accountId);
         return token;
       }
     } catch (error) {
       console.error("Login hatası:", error);
       throw error;
+    }
+  }
+
+  async getStoreId(userId) {
+    try {
+      console.log("getStore gövdesi");
+      const user = userId;
+      const response = await axios.get(`${this.baseUrl}/getStoreId`, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        params: {
+          userId: user,
+        },
+      });
+
+      Cookies.set("storeId", response.data, {
+        expires: 1,
+        secure: true,
+        sameSite: "Strict",
+      });
+    } catch (error) {
+      console.log(error);
     }
   }
 
