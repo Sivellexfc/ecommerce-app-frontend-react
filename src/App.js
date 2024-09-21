@@ -10,12 +10,13 @@ import Footer from "./components/Footer";
 import ProductForm from "./components/ProductForm";
 import LoginSeller from "./pages/LoginSeller";
 import RegisterSeller from "./pages/RegislerSeller";
+import MyStore from "./pages/MyStore";
 
 const App = () => {
   return (
     <div className="overflow-hidden">
       <Router>
-        <Header />
+        <Header userRole={localStorage.getItem("userRole")} />
 
         <Routes>
           <Route path="/" element={<Home />} />
@@ -23,6 +24,7 @@ const App = () => {
           <Route path="/newProduct" element={<ProductForm />} />
           <Route path="/login-seller" element={<LoginSeller/>}></Route>
           <Route path="/register-seller" element={<RegisterSeller/>}></Route>
+          <Route path="/seller-dashboard" element={<MyStore></MyStore>}></Route>
         </Routes>
 
         <Sidebar></Sidebar>

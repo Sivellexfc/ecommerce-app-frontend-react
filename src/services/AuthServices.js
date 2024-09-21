@@ -1,5 +1,6 @@
 import axios from "axios";
 import Cookies from "js-cookie";
+import { jwtDecode } from "jwt-decode";
 
 class AuthServices {
   constructor() {
@@ -16,6 +17,10 @@ class AuthServices {
 
       if (response.status === 200) {
         const token = response.data;
+        const decodedToken = jwtDecode(token);
+        const userRole = decodedToken.roles;
+        
+        localStorage.setItem("userRole", userRole);
         Cookies.set("authToken", token, {
           expires: 1,
           secure: true,
@@ -42,7 +47,7 @@ class AuthServices {
   }
 
   async registerSeller(registerData) {
-    console.log(registerData)
+    console.log(registerData);
     try {
       const response = await axios.post(
         `${this.baseUrl}/register-seller`,

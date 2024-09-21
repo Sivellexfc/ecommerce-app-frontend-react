@@ -1,19 +1,14 @@
 import React, { useState } from "react";
-
-import axios from "axios";
 import Cookies from "js-cookie";
+import axios from "axios";
 
 const ProductForm = () => {
-  Cookies.set("authToken", "eyJhbGciOiJIUzI1NiJ9.eyJhY2NvdW50SWQiOiIxIiwicm9sZXMiOlsiU0VMTEVSIl0sInN1YiI6InNlbGxlciIsImlhdCI6MTcyNjcwMDM3NSwiZXhwIjoxNzI2NzE4Mzc1fQ.6eIHWbBKFZxtnKWjAlxTQ2QNPjTItz2YonphuqYaBNQ", { expires: 1 }); // 1 gün geçerli
-
-  const jwtToken = Cookies.get("authToken");
 
   const [productName, setProductName] = useState("");
   const [productPrice, setProductPrice] = useState("");
   const [productDescription, setProductDescription] = useState("");
   const [productCategory, setProductCategory] = useState("");
   const [productBrand, setProductBrand] = useState("");
-  //const [jwtToken, setjwtToken] = useState("");
   const [productImage, setProductImage] = useState(null);
 
   const handleImageChange = (e) => {
@@ -22,30 +17,26 @@ const ProductForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Form verilerini ve dosyayı topluyoruz
+    const jwtToken = Cookies.get("authToken");
+    
     const formData = new FormData();
-
-    // Text alanlarını formData'ya ekle
     formData.append("productName", productName);
     formData.append("productDescription", productDescription);
     formData.append("categoryName", productCategory);
     formData.append("brand", productBrand);
-    formData.append("price", parseFloat(productPrice)); // sayıya çevirmek gerekebilir
-    formData.append("stock", 100); // Örneğin, stock verisini sabit olarak ekliyoruz
-
-    // Dosya verisini formData'ya ekle
-    formData.append("file", productImage); // selectedFile kullanıcı tarafından seçilen dosya
+    formData.append("price", parseFloat(productPrice)); 
+    formData.append("stock", 100); 
+    formData.append("file", productImage); 
 
     try {
-      // Axios ile formData'yı sunucuya gönderiyoruz
+      console.log("Token: " + jwtToken);
       const response = await axios.post(
         "http://localhost:8889/api/product/new",
         formData,
         {
           headers: {
-            Authorization: `Bearer ${jwtToken}`, // JWT token gerekiyorsa eklenir
-            //"Content-Type": "multipart/form-data", // FormData ile gönderim yapıldığı için bu gerekli
+            Authorization: `Bearer ${jwtToken}`, 
+            "Content-Type": "multipart/form-data",
           },
         }
       );

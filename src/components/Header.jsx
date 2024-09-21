@@ -6,11 +6,22 @@ import { BsBag } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import Logo from "../utils/logo.svg";
 
-const Header = () => {
-  const [isActive, setIsActive] = useState(false);
+import Cookies from "js-cookie";
 
+const Header = ({ userRole }) => {
+  const [isActive, setIsActive] = useState(false);
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
   const { isOpen, setIsOpen } = useContext(SidebarContext);
   const { itemAmount } = useContext(CartContext);
+
+  useEffect(() => {
+    const token = Cookies.get("authToken"); // Eğer token cookies'de saklanıyorsa
+    if (token) {
+      setIsUserLoggedIn(true);
+    } else {
+      setIsUserLoggedIn(false);
+    }
+  }, []);
 
   useEffect(() => {
     window.addEventListener("scroll", () => {
@@ -18,11 +29,17 @@ const Header = () => {
     });
   });
 
+  const handleLogout = () => {
+    Cookies.remove("authToken"); // Çıkış yapınca token'ı sileriz
+    setIsUserLoggedIn(false);
+    window.location.href = "/"; // Anasayfaya yönlendir
+  };
+
   return (
     <header
       className={`${
         isActive ? "bg-white py-4 shadow-md" : "bg-none py-6"
-      } fixed w-full z-10 transition-all`}
+      } fixed w-full z-10 transition-all shadow-md`}
     >
       <div className="container mx-auto flex items-center justify-between h-full">
         <Link to={`/`}>
@@ -32,13 +49,44 @@ const Header = () => {
         </Link>
 
         <div className=" flex justify-between w-[320px] py-[20px]">
-          <Link to={`/login-seller`}>
-            <div className="hover:underline  cursor-pointer">Satıcı Girişi</div>
-          </Link>
+          {!isUserLoggedIn ? (
+            <>
+              {/* Kullanıcı giriş yapmamışsa */}
+              <Link to={`/login-seller`}>
+                <div className="hover:underline cursor-pointer">
+                  Satıcı Girişi
+                </div>
+              </Link>
 
-          <Link to={`/login-user`}>
-            <div className="hover:underline cursor-pointer">Kullanıcı Girişi</div>
-          </Link>
+              <Link to={`/login-user`}>
+                <div className="hover:underline cursor-pointer">
+                  Kullanıcı Girişi
+                </div>
+              </Link>
+            </>
+          ) : (
+            <>
+              {/* Kullanıcı giriş yapmışsa */}
+              {userRole === "CUSTOMER" && (
+                <Link to={`/customer-profile`}>
+                  <div className="hover:underline cursor-pointer">Profilim</div>
+                </Link>
+              )}
+
+              {userRole === "SELLER" && (
+                <Link to={`/seller-dashboard`}>
+                  <div className="hover:underline cursor-pointer">Mağazam</div>
+                </Link>
+              )}
+
+              <div
+                onClick={handleLogout}
+                className="hover:underline cursor-pointer"
+              >
+                Çıkış Yap
+              </div>
+            </>
+          )}
 
           <div
             onClick={() => setIsOpen(!isOpen)}

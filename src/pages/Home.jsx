@@ -1,11 +1,16 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { ProductContext } from "../context/ProductContext";
 import Product from "../components/Product";
 import Hero from "../components/Hero";
 
 const Home = () => {
-  const { products } = useContext(ProductContext);
-  console.log(products);
+  const { products,fetchAllProducts } = useContext(ProductContext);
+
+  useEffect(() => {
+    fetchAllProducts(); // Herhangi bir parametre gerekmeden tüm ürünleri çek
+  }, []);
+
+ 
   return (
     <div>
       <Hero></Hero>
