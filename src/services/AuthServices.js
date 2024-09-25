@@ -35,6 +35,34 @@ class AuthServices {
     }
   }
 
+  async loginCustomer(loginData) {
+    try {
+      const response = await axios.post(`${this.baseUrl}/token`, loginData, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (response.status === 200) {
+        const token = response.data;
+        const decodedToken = jwtDecode(token);
+        const userRole = decodedToken.roles;
+        console.log("userole" + userRole)
+        localStorage.setItem("userRole", userRole);
+        Cookies.set("authToken", token, {
+          expires: 1,
+          secure: true,
+          sameSite: "Strict",
+        });
+        this.getStoreId(decodedToken.accountId);
+        return token;
+      }
+    } catch (error) {
+      console.error("Login hatası:", error);
+      throw error;
+    }
+  }
+
   async getStoreId(userId) {
     try {
       console.log("getStore gövdesi");
@@ -102,6 +130,10 @@ class AuthServices {
               secure: true,
               sameSite: "Strict",
             });
+            const decodedToken = jwtDecode(token);
+            const userRole = decodedToken.roles;
+    
+            localStorage.setItem("userRole", userRole);
             return token;
           }
         } catch (error) {
@@ -114,6 +146,56 @@ class AuthServices {
       throw error;
     }
   }
+
+  async registerCustomer(registerData) {
+    console.log(registerData);
+    try {
+      const response = await axios.post(
+        `${this.baseUrl}/register-customer`,
+        registerData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (response.status === 200) {
+        try {
+          const response = await axios.post(
+            `${this.baseUrl}/token`,
+            registerData,
+            {
+              headers: {
+                "Content-Type": "application/json",
+              },
+            }
+          );
+
+          if (response.status === 200) {
+            const token = response.data;
+            Cookies.set("authToken", token, {
+              expires: 1,
+              secure: true,
+              sameSite: "Strict",
+            });
+            const decodedToken = jwtDecode(token);
+            const userRole = decodedToken.roles;
+            console.log("userROle"+userRole)
+            localStorage.setItem("userRole", userRole);
+            return token;
+          }
+        } catch (error) {
+          console.error("Login hatası:", error);
+          throw error;
+        }
+      }
+    } catch (error) {
+      console.error("Register hatası:", error);
+      throw error;
+    }
+  }
+
 }
 
 export default new AuthServices();

@@ -2,6 +2,8 @@ import React, { useContext } from "react";
 import { useParams } from "react-router-dom";
 import { CartContext } from "../context/CartContext";
 import { ProductContext } from "../context/ProductContext";
+import Comment from "../components/Comment";
+
 
 const ProductDetails = () => {
 
@@ -21,11 +23,12 @@ const ProductDetails = () => {
     );
   }
 
-  const { price, productName, productDescription, imageUrl } = product;
+  const { price, productName, productDescription, imageUrl, comments} = product;
 
   return (
-    <section className="pt-32 pb-12 lg:py-32 h-screen flex items-center">
-      <div className="container mx-auto">
+    <section className="pt-32 pb-12 lg:py-32 h-screen flex items-center flex-col ">
+
+      <div className="container mx-auto mt-[100px] mb-[100px]">
         <div className="flex flex-col lg:flex-row items-center">
           <div className="flex flex-1 justify-center items-center mb-8 lg:mb-0">
             <img className="max-w-[200px] lg:max-w-sm" src={imageUrl} alt=""></img>
@@ -42,6 +45,20 @@ const ProductDetails = () => {
           </div>
         </div>
       </div>
+
+      <div className={"w-[620px] mt-[100px] p-[20px]"}>
+      <h2 className="text-2xl font-bold mb-6 text-gray-700">Yorumlar</h2>
+      
+      {comments.length > 0 ? (
+            comments.map((comment, index) => (
+              <Comment key={index} comment={comment} />
+            ))
+          ) : (
+            <p>Henüz yorum yapılmamış.</p>
+          )}
+      
+      </div>
+
     </section>
   );
 };

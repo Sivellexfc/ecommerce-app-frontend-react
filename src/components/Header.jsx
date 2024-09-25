@@ -60,7 +60,7 @@ const Header = ({ userRole }) => {
                 </div>
               </Link>
 
-              <Link to={`/login-user`}>
+              <Link to={`/login-customer`}>
                 <div className="hover:underline cursor-pointer">
                   Kullanıcı Girişi
                 </div>

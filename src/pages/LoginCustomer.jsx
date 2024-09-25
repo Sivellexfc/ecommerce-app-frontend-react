@@ -5,7 +5,7 @@ import { FaEdit, FaTrash } from "react-icons/fa";
 import AuthServices from "../services/AuthServices";
 import { Link } from "react-router-dom";
 
-const LoginSeller = () => {
+const LoginCustomer = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -18,11 +18,11 @@ const LoginSeller = () => {
     };
 
     try {
-      const token = await AuthServices.loginSeller({ username, password });
+      const token = await AuthServices.loginCustomer({ username, password });
       if (token) {
         const isValid = await AuthServices.validateToken(token);
         if (isValid.status === 200) {
-          window.location.href = "/";
+          //window.location.href = "/";
           console.log("Giriş başarılı, token:", token);
         }
       }
@@ -33,7 +33,7 @@ const LoginSeller = () => {
 
   return (
     <div className="max-w-lg mx-auto mt-10 bg-white p-6 mb-[100px] mt-[100px]">
-      <h2 className="text-2xl font-bold mb-6 text-gray-700">SATICI GİRİŞİ</h2>
+      <h2 className="text-2xl font-bold mb-6 text-gray-700">KULLANICI GİRİŞİ</h2>
       <form onSubmit={handleSubmit} encType="multipart/form-data">
         {/* Kullanıcı Adı */}
         <div className="mb-4">
@@ -67,7 +67,7 @@ const LoginSeller = () => {
         </button>
 
         <div className="flex justify-between px-[80px] py-[10px] text-primary">
-          <Link to={`/register-seller`}>
+          <Link to={`/register-customer`}>
             <div className="hover:underline cursor-pointer">
               Yeni Hesap Oluştur
             </div>
@@ -80,4 +80,4 @@ const LoginSeller = () => {
   );
 };
 
-export default LoginSeller;
+export default LoginCustomer;

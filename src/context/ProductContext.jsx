@@ -8,8 +8,7 @@ const ProductProvider = ({children}) => {
     const [products,setProducts] = useState([]);
     const [productsByStore,setproductsByStore] = useState([]);
     
-    
-
+  
     const fetchAllProducts = async () => {
         const token = Cookies.get("authToken");
         const response = await fetch("http://localhost:8889/api/product/get/all", {
@@ -18,8 +17,11 @@ const ProductProvider = ({children}) => {
             }
         });
         const data = await response.json();
+        console.log(data)
         setProducts(data);
     };
+
+    
 
     const fetchProductsByStore = useCallback(async ({ storeId }) => {
         const token = Cookies.get("authToken");

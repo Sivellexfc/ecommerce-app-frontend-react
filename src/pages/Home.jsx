@@ -24,6 +24,7 @@ const Home = () => {
                 <Product
                   key={product.id}
                   product={product}
+                  seller={false}
                 >
                   {product.title}
                 </Product>
