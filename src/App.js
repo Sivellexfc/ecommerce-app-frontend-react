@@ -15,6 +15,7 @@ import MyStore from "./pages/MyStore";
 import UpdateProductForm from "./components/UpdateProductForm";
 import RegisterCustomer from "./pages/RegisterCustomer";
 import LoginCustomer from "./pages/LoginCustomer";
+import CompleteOrder from "./pages/CompleteOrder";
 
 const App = () => {
   return (
@@ -36,16 +37,11 @@ const App = () => {
                   <Route path="/register-customer" element={<RegisterCustomer/>}></Route>
                   <Route path="/seller-dashboard" element={<MyStore></MyStore>}></Route>
                   <Route path="/new-store" element={<NewStoreForm></NewStoreForm>} ></Route>
+                  <Route path="/complete-order" element={<CompleteOrder></CompleteOrder>} ></Route>
                   <Route path="/edit-product/:productId" element={<UpdateProductForm></UpdateProductForm>}></Route>
                 </Routes>
             </main>
         </div>
-
-          
-        
-
-
-        
         <Footer></Footer>
       </Router>
     </div>
