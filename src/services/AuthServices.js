@@ -54,7 +54,6 @@ class AuthServices {
           secure: true,
           sameSite: "Strict",
         });
-        this.getStoreId(decodedToken.accountId);
         return token;
       }
     } catch (error) {

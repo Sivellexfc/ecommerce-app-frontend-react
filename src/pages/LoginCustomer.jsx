@@ -22,7 +22,7 @@ const LoginCustomer = () => {
       if (token) {
         const isValid = await AuthServices.validateToken(token);
         if (isValid.status === 200) {
-          //window.location.href = "/";
+          window.location.href = "/";
           console.log("Giriş başarılı, token:", token);
         }
       }

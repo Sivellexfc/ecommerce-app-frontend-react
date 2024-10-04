@@ -70,7 +70,7 @@ const Header = ({ userRole }) => {
             <>
               {/* Kullanıcı giriş yapmışsa */}
               {userRole === "CUSTOMER" && (
-                <Link to={`/customer-profile`}>
+                <Link to={`/profile`}>
                   <div className="hover:underline cursor-pointer">Profilim</div>
                 </Link>
               )}

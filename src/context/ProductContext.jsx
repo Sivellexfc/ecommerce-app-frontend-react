@@ -8,7 +8,6 @@ const ProductProvider = ({children}) => {
     const [products,setProducts] = useState([]);
     const [productsByStore,setproductsByStore] = useState([]);
     
-  
     const fetchAllProducts = async () => {
         const token = Cookies.get("authToken");
         const response = await fetch("http://localhost:8889/api/product/get/all", {

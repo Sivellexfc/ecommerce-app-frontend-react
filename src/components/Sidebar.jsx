@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link,useNavigate  } from "react-router-dom";
+import Cookies from 'js-cookie'; 
 
 import { IoMdArrowForward } from "react-icons/io";
 import { FiTrash2 } from "react-icons/fi";
@@ -12,6 +13,20 @@ import { CartContext } from "../context/CartContext";
 const Sidebar = () => {
   const { isOpen, handleClose } = useContext(SidebarContext);
   const { cart, clearCart, increaseAmount, total } = useContext(CartContext);
+  const navigate = useNavigate();
+
+  const handleRedirect = () => {
+    const jwtToken = Cookies.get("authToken"); // JWT token'ı kontrol et
+    if (!jwtToken) {
+      // Eğer token yoksa kullanıcı giriş yapmamış, login sayfasına yönlendir
+      navigate('/login');
+    } else {
+      // Eğer token varsa kullanıcı giriş yapmış, complete-order sayfasına yönlendir
+      navigate('/complete-order');
+      
+    }
+    handleClose(!isOpen);
+  };
   return (
     <div
       className={`${
@@ -53,12 +68,12 @@ const Sidebar = () => {
         >
           GÖRÜNTÜLE
         </Link>
-        <Link
-          to={``}
-          className="bg-primary flex p-4 justify-center items-center text-white w-full font-medium"
+        <div
+          onClick={handleRedirect}
+          className="bg-primary flex p-4 justify-center items-center text-white w-full font-medium cursor-pointer"
         >
           SİPARİŞİ TAMAMLA
-        </Link>
+        </div>
       </div>
     </div>
   );

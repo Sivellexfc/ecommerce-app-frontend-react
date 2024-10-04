@@ -16,6 +16,7 @@ import UpdateProductForm from "./components/UpdateProductForm";
 import RegisterCustomer from "./pages/RegisterCustomer";
 import LoginCustomer from "./pages/LoginCustomer";
 import CompleteOrder from "./pages/CompleteOrder";
+import Profile from "./pages/Profile";
 
 const App = () => {
   return (
@@ -39,6 +40,7 @@ const App = () => {
                   <Route path="/new-store" element={<NewStoreForm></NewStoreForm>} ></Route>
                   <Route path="/complete-order" element={<CompleteOrder></CompleteOrder>} ></Route>
                   <Route path="/edit-product/:productId" element={<UpdateProductForm></UpdateProductForm>}></Route>
+                  <Route path="/profile" element={<Profile></Profile>}></Route>
                 </Routes>
             </main>
         </div>
