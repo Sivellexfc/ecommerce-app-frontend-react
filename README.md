@@ -1,70 +1,88 @@
-# Getting Started with Create React App
+# E-Commerce App Frontend (React)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Bu proje, **React tabanlı** bir e-ticaret uygulamasının frontend kısmıdır. Kullanıcılar ürünleri görüntüleyebilir, sepete ekleyebilir, ödeme yapabilir ve ürünlere yorum yapabilir. Uygulama, hem mobil hem de masaüstü cihazlar için optimize edilmiştir.
 
-## Available Scripts
+![home](https://github.com/user-attachments/assets/25a42e30-771b-4c4d-bf9a-c05f1b8581ff)
 
-In the project directory, you can run:
+## İçindekiler
 
-### `npm start`
+- [Özellikler](#özellikler)
+- [Kullanılan Teknolojiler](#kullanılan-teknolojiler)
+- [Uygulamanın Çalıştırılması](#uygulamanın-çalıştırılması)
+- [Proje Yapısı](#proje-yapısı)
+- [API Uç Noktaları](#api-uç-noktaları)
+- [Katkıda Bulunma](#katkıda-bulunma)
+- [Lisans](#lisans)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Özellikler
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **Ürün Kataloğu**: Çeşitli satıcıların sattığı ürünleri listeleyebilirsiniz.
+- **Ürün Detayları**: Ürün bilgilerini, kullanıcı yorumlarını ve puanlamaları görüntüleyebilirsiniz.
+![details](https://github.com/user-attachments/assets/241b3a42-23d3-4999-ba2e-2c3bf7b7fa8f)
+- **Sepet**: Ürünleri sepete ekleyebilir, miktarlarını güncelleyebilir ve çıkarabilirsiniz.
 
-### `npm test`
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/a1a2a594-160c-4ef0-a589-9ecbe0cc1fb3" alt="cart" width="300"/>
+</div>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+- **Kullanıcı Doğrulaması**: JWT ile oturum açabilirsiniz, kayıt olabilirsiniz.
+![kayıtol](https://github.com/user-attachments/assets/5800ef59-04c7-407c-a067-a66a34c1fb8c)
+- **Satıcı Doğrulaması**: JWT ile satıcı olarak oturum açabilirsiniz, kayıt olabilirsiniz.
+![hesapsatıcıoluştur](https://github.com/user-attachments/assets/f60a1c43-3ea8-4144-8e2c-8a812349b9b6)
+- **Mağaza İşlemleri**: Satıcı olarak açılan hesabınıza bir mağaza bağlayabilirsiniz.
+![magazayok](https://github.com/user-attachments/assets/d460bfbe-fc61-41d0-873f-1bc1adea7826)
+![magazaolustur](https://github.com/user-attachments/assets/04d834e9-a1ff-4e92-b9f6-469ff7d649fe)
+![magazam](https://github.com/user-attachments/assets/3aa541ba-505e-4ddc-8be4-dfc02a370df1)
+- **Ürün Ekleme**: Oluşturulan mağazanıza çeşitli ürünler ekleyebilirsiniz ve ürün bilgilerini güncelleyip detaylandırabilirsiniz.
+![urunekle](https://github.com/user-attachments/assets/d5f8391c-050f-4a24-9993-c08a355bdbff)
+- **Sipariş Verme**: Kullanıcılar yeni sipariş verebilir veya önceki siparişlerini görüntüleyebilir.
+![completeorder](https://github.com/user-attachments/assets/75f164b6-c8b1-4e4d-80d3-a0de285b2d5c)
+![ONAY](https://github.com/user-attachments/assets/12b5c268-6360-4025-9fb2-b4e03ea5f7ba)
+![history](https://github.com/user-attachments/assets/1409ada3-abc7-4959-b1ff-29683d1cdb23)
+- **Değerlendirme ve Yorumlar**: Kullanıcılar geçmiş siparişlerindeki ürünlere yorum yapabilir ve puan verebilir.
+![review](https://github.com/user-attachments/assets/48b1c240-6b4a-44f3-984f-8dec22f3a8d4)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Kullanılan Teknolojiler
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- **Frontend**:
+  - [React.js](https://reactjs.org/) - Kullanıcı arayüzleri oluşturmak için JavaScript kütüphanesi.
+  - [Cookies](https://www.npmjs.com/package/react-cookie) - Kullanıcı kimlik doğrulama işlemlerinde kullanılan token'ları yönetmek için kullanılır.
+  - [JWT Decode](https://www.jwt.io) - JSON Web Token (JWT) işlemleri için kullanılır.
+  - [React Router](https://reactrouter.com/) - Uygulama içi yönlendirme.
+  - [Axios](https://axios-http.com/) - HTTP istekleri yapmak için kütüphane.
+  - [Tailwind CSS](https://tailwindcss.com/) - CSS çerçevesi.
+  - [React Icons](https://react-icons.github.io/react-icons/) - İkon kütüphanesi.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- **Backend (Harici API)**:
+  - Ürün, sipariş ve kullanıcı verileri için bir backend servisi ile ([spring-boot-ecommerce-microservice](https://github.com/Sivellexfc/spring-boot-ecommerce-microservice)) entegre edilmiştir.
 
-### `npm run eject`
+## Kurulum
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Frontend'i yerel ortamda çalıştırmak için aşağıdaki adımları takip edin:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. **Proje deposunu klonlayın**:
+    ```bash
+    git clone https://github.com/Sivellexfc/ecommerce-app-frontend-react.git
+    cd ecommerce-app-frontend-react
+    ```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+2. **Bağımlılıkları yükleyin**:
+    ```bash
+    npm install
+    ```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+3. **Geliştirme sunucusunu başlatın**:
+    ```bash
+    npm start
+    ```
 
-## Learn More
+   Uygulama `http://localhost:3000` adresinde çalışacaktır.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Uygulamanın Çalıştırılması
 
-### Code Splitting
+Uygulamayı geliştirme modunda çalıştırmak için:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```bash
+npm start

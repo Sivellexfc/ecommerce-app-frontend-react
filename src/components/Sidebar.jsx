@@ -19,7 +19,7 @@ const Sidebar = () => {
     const jwtToken = Cookies.get("authToken"); // JWT token'ı kontrol et
     if (!jwtToken) {
       // Eğer token yoksa kullanıcı giriş yapmamış, login sayfasına yönlendir
-      navigate('/login');
+      navigate('/login-customer');
     } else {
       // Eğer token varsa kullanıcı giriş yapmış, complete-order sayfasına yönlendir
       navigate('/complete-order');
